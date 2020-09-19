@@ -18,6 +18,23 @@ RSpec.describe "Merchant Coupons", type: :feature do
 
       visit '/merchant'
       expect(page).to have_link("My Coupons")
+      click_on "My Coupons"
+      expect(current_path).to eq('/merchant/coupons')
+      expect(page).to have_content(@coupon.name)
+      expect(page).to have_content(@coupon.code)
+      expect(page).to have_content(@coupon.percent_off)
+    end
+
+    it "I can see a link to create a new coupon" do
+      visit '/login'
+      expect(current_path).to eq("/login")
+
+      fill_in :email, with: @user.email
+      fill_in :password, with: @user.password
+      click_button "Login"
+      click_on "My Coupons"
+
+      expect(page).to have_link("Create Coupon")
     end
 
   end
