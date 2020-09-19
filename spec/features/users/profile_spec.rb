@@ -24,7 +24,7 @@ RSpec.describe "User Profile Path" do
 
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
-      click_button 'Log In'
+      click_button 'Login'
 
       click_link 'Edit'
 
@@ -59,7 +59,7 @@ RSpec.describe "User Profile Path" do
 
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
-      click_button 'Log In'
+      click_button 'Login'
 
       click_link 'Change Password'
 
@@ -81,7 +81,7 @@ RSpec.describe "User Profile Path" do
 
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
-      click_button 'Log In'
+      click_button 'Login'
 
       expect(page).to have_content("Your email or password was incorrect!")
 
@@ -89,7 +89,7 @@ RSpec.describe "User Profile Path" do
 
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: "newpassword"
-      click_button 'Log In'
+      click_button 'Login'
 
       expect(current_path).to eq(profile_path)
     end

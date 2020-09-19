@@ -12,7 +12,7 @@ RSpec.describe 'User Login and Log Out' do
 
         fill_in 'Email', with: @user.email
         fill_in 'Password', with: @user.password
-        click_button 'Log In'
+        click_button 'Login'
 
         expect(current_path).to eq(profile_path)
         expect(page).to have_content("Logged in as #{@user.name}")
@@ -39,7 +39,7 @@ RSpec.describe 'User Login and Log Out' do
 
         fill_in 'Email', with: @m_user.email
         fill_in 'Password', with: @m_user.password
-        click_button 'Log In'
+        click_button 'Login'
 
         expect(current_path).to eq(merchant_dashboard_path)
         expect(page).to have_content("Logged in as #{@m_user.name}")
@@ -65,7 +65,7 @@ RSpec.describe 'User Login and Log Out' do
 
         fill_in 'Email', with: @admin.email
         fill_in 'Password', with: @admin.password
-        click_button 'Log In'
+        click_button 'Login'
 
         expect(current_path).to eq(admin_dashboard_path)
         expect(page).to have_content("Logged in as #{@admin.name}")
@@ -92,10 +92,10 @@ RSpec.describe 'User Login and Log Out' do
 
       fill_in 'Email', with: 'bad@email.com'
       fill_in 'Password', with: @user.password
-      click_button 'Log In'
+      click_button 'Login'
 
       expect(page).to have_content('Your email or password was incorrect!')
-      expect(page).to have_button('Log In')
+      expect(page).to have_button('Login')
     end
 
     it 'incorrect password' do
@@ -103,10 +103,10 @@ RSpec.describe 'User Login and Log Out' do
 
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: 'bad password'
-      click_button 'Log In'
+      click_button 'Login'
 
       expect(page).to have_content('Your email or password was incorrect!')
-      expect(page).to have_button('Log In')
+      expect(page).to have_button('Login')
     end
   end
 
@@ -120,7 +120,7 @@ RSpec.describe 'User Login and Log Out' do
 
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
-      click_button 'Log In'
+      click_button 'Login'
 
       click_link 'Log Out'
 
@@ -137,7 +137,7 @@ RSpec.describe 'User Login and Log Out' do
 
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
-      click_button 'Log In'
+      click_button 'Login'
 
       visit item_path(ogre)
 
