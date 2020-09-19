@@ -1,0 +1,11 @@
+<h1>Manage My Coupons</h1>
+
+<% @coupons.each do |coupon| %>
+<section id='coupon-<%= coupon.id %>'>
+  <p>Coupon Name: <%= link_to coupon.name, "/merchant/coupons/#{coupon.id}" %></p>
+  <p>Coupon Code: <%= coupon.code %></p>
+  <p>Coupon Percent Off: <%= coupon.percent_off %></p>
+</section>
+<% end %>
+
+<%= link_to 'Create Coupon', '/merchant/coupons/new' %>
