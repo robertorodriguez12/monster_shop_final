@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_09_19_171410) do
     t.integer "percent_off"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "status", default: false
+    t.boolean "status", default: true
     t.bigint "merchant_id"
     t.index ["merchant_id"], name: "index_coupons_on_merchant_id"
   end
