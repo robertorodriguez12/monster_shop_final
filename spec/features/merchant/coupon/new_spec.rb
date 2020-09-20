@@ -5,7 +5,7 @@ RSpec.describe "Merchant Coupons", type: :feature do
     before(:each) do
       @bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Richmond', state: 'VA', zip: 23137)
       @user = @bike_shop.users.create(email: "c_j@email.com", password: "test", name: "Meg", city: "blah", state: "blah", address: "blah", zip: 12345, role: 1)
-      @coupon = @bike_shop.coupons.create!(name: "Bulk Discount", code:"Bulk", percent_off: 5)
+      @coupon = @bike_shop.coupons.create!(name: "Bulk Discount", code:"Bulk", percent_off: 5, quantity_requirement: 20)
     end
 
     it "I can create new coupons" do
@@ -21,8 +21,8 @@ RSpec.describe "Merchant Coupons", type: :feature do
       fill_in 'Name', with: 'Holiday Sale'
       fill_in 'Code', with: 'HOLSALE'
       fill_in 'Percent off', with: 3
+      fill_in 'Quantity requirement', with: 5
       click_on 'Create Coupon'
-
       expect(page).to have_content("Coupon Created")
       expect(current_path).to eq("/merchant/coupons")
     end

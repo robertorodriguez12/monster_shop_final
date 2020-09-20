@@ -6,6 +6,7 @@
   <p>Coupon Code: <%= coupon.code %></p>
   <p>Coupon Percent Off: <%= coupon.percent_off %></p>
   <%= link_to 'Edit', "/merchant/coupons/#{coupon.id}/edit" %>
+  <%= link_to 'Delete', merchant_coupon_path(coupon), method: :delete %>
 </section>
 <% end %>
 

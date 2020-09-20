@@ -9,24 +9,22 @@ RSpec.describe "Merchant Coupons", type: :feature do
       @coupon2 = @bike_shop.coupons.create!(name: "Holiday Sale", code:"Bulk", percent_off: 10, quantity_requirement: 20)
     end
 
-    it "I can visit a coupons show page" do
+    it "I can delete a coupon" do
       visit '/login'
       fill_in :email, with: @user.email
       fill_in :password, with: @user.password
       click_button "Login"
       click_on "My Coupons"
 
-      within"#coupon-#{@coupon.id}" do
-        click_on "#{@coupon.name}"
+      within"#coupon-#{@coupon2.id}" do
+        expect(page).to have_link("Delete")
+        click_on "Delete"
       end
 
-      expect(current_path).to eq("/merchant/coupons/#{@coupon.id}")
-      expect(page).to have_content(@coupon.name)
-      expect(page).to have_content(@coupon.code)
-      expect(page).to have_content(@coupon.percent_off)
-      expect(page).to have_content("Enabled")
+      expect(current_path).to eq("/merchant/coupons")
+      expect(page).to_not have_content(@coupon2.name)
+      expect(page).to have_content("Coupon deleted")
 
     end
-
   end
 end

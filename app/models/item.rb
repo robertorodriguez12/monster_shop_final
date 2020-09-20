@@ -29,4 +29,12 @@ class Item < ApplicationRecord
   def average_rating
     reviews.average(:rating)
   end
+
+  def quantity_ordered
+    order_items.sum(:quantity)
+  end
+
+  def discounted_price(coupon)
+    self.price - (self.price * (coupon.to_f / 100)).round(2)
+  end
 end

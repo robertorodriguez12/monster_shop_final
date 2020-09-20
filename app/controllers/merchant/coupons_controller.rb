@@ -14,8 +14,8 @@ class Merchant::CouponsController < Merchant::BaseController
   def create
     @coupon = current_user.merchant.coupons.new(coupon_params)
     if @coupon.save
-      flash[:success] = 'Coupon Created'
       redirect_to '/merchant/coupons'
+      flash[:success] = 'Coupon Created'
     else
       flash[:error] = 'You are missing required fields'
       render :new
@@ -24,6 +24,25 @@ class Merchant::CouponsController < Merchant::BaseController
 
   def edit
     @coupon = Coupon.find(params[:id])
+  end
+
+  def update
+    @coupon = Coupon.find(params[:id])
+    @coupon.update(coupon_params)
+    if @coupon.save
+      flash[:success] = "Your coupon has been updated."
+      redirect_to "/merchant/coupons"
+    else
+      flash[:error] = "You are missing fields"
+      render :edit
+    end
+  end
+
+  def destroy
+    @coupon = Coupon.find(params[:id])
+    @coupon.delete
+    flash[:success] = "Coupon deleted"
+    redirect_to "/merchant/coupons"
   end
 
   private

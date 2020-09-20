@@ -13,10 +13,15 @@ class User::OrdersController < ApplicationController
     order = current_user.orders.new
     order.save
       cart.items.each do |item|
+        if item.merchant.coupons.best_coupon(cart.count_of(item.id))
+          total_price = item.discounted_price(item.merchant.coupon.best_coupons(cart.count_of(item.id)))
+        else
+          total_price = item.price
+        end
         order.order_items.create({
           item: item,
           quantity: cart.count_of(item.id),
-          price: item.price
+          price: total_price
           })
       end
     session.delete(:cart)

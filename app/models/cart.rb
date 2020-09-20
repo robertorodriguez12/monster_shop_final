@@ -40,7 +40,20 @@ class Cart
     @contents[item_id.to_s] * Item.find(item_id).price
   end
 
+
   def limit_reached?(item_id)
     count_of(item_id) == Item.find(item_id).inventory
   end
+
+  def is_coupon?(all_coupons, item_id)
+    all_coupons.any? do |coup|
+      coup.quantity_requirement <= count_of(item_id)
+    end
+  end
+
+  def discounted_subtotal(item_id, coupon)
+    total = @contents[item_id.to_s] * Item.find(item_id).discounted_price(coupon)
+    total.round(2)
+  end
+
 end

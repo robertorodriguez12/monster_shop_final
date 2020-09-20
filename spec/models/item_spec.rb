@@ -64,6 +64,9 @@ RSpec.describe Item do
       @order_3.order_items.create!(item: @gator, price: @gator.price, quantity: 1)
     end
 
+    it ".quantity_ordered" do
+      expect(@gator.quantity_ordered).to eq(1)
+    end
     it '.active_items' do
       expect(Item.active_items).to eq([@ogre, @giant])
     end
