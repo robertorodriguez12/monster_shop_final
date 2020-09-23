@@ -46,7 +46,7 @@ class Cart
   end
 
   def is_coupon?(all_coupons, item_id)
-    all_coupons.any? do |coup|
+    all_coupons.any? do |coup| # => Rework this method to get rid of the ruby language and only use active record.
       coup.quantity_requirement <= count_of(item_id)
     end
   end
