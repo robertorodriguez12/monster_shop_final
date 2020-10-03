@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   resources :reviews, only: [:edit, :update, :destroy]
 
+  # resources :cart, only: [:show, :empty]
+
   get '/cart', to: 'cart#show'
   post '/cart/:item_id', to: 'cart#add_item'
   delete '/cart', to: 'cart#empty'
@@ -35,7 +37,15 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get '/', to: 'dashboard#index', as: :dashboard
-    resources :coupons
+    get '/coupons', to: 'coupons#index'
+    get '/coupons/new', to: 'coupons#new'
+    post '/coupons', to: 'coupons#create'
+    get '/coupons/:id', to: 'coupons#show'
+    get '/coupons/:id/edit', to: 'coupons#edit'
+    patch '/coupons/:id', to: 'coupons#update'
+    put '/coupons/:id', to: 'coupons#update'
+    # delete '/coupons/:id', to: 'coupons#destroy'
+    resources :coupons, only: [:destroy]
     resources :orders, only: :show
     resources :items, only: [:index, :new, :create, :edit, :update, :destroy]
     put '/items/:id/change_status', to: 'items#change_status'
